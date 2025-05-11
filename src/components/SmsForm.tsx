@@ -9,8 +9,7 @@ import {
     ListItem, 
     ListItemText,
     Alert,
-    CircularProgress,
-    FormHelperText
+    CircularProgress
 } from '@mui/material';
 import { splitMessage } from '../services/api';
 import type { SmsRequest } from '../types/sms';
@@ -43,13 +42,32 @@ export const SmsForm = () => {
     const characterCount = message.length;
 
     return (
-        <Box sx={{ maxWidth: 600, mx: 'auto', mt: 4, p: 2 }}>
-            <Paper elevation={3} sx={{ p: 3 }}>
-                <Typography variant="h5" component="h1" gutterBottom>
+        <Box sx={{ 
+            width: '100%',
+            maxWidth: { xs: '100%', sm: 600 },
+            mx: 'auto',
+            mt: { xs: 2, sm: 4 },
+            px: { xs: 1, sm: 2 },
+            display: 'flex',
+            flexDirection: 'column',
+            minHeight: 'calc(100vh - 64px)' // Subtract header height
+        }}>
+            <Paper elevation={3} sx={{ 
+                p: { xs: 2, sm: 3 },
+                display: 'flex',
+                flexDirection: 'column',
+                flexGrow: 1
+            }}>
+                <Typography 
+                    variant="h5" 
+                    component="h1" 
+                    gutterBottom
+                    sx={{ fontSize: { xs: '1.25rem', sm: '1.5rem' } }}
+                >
                     SMS Splitter
                 </Typography>
                 
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} style={{ marginBottom: 'auto' }}>
                     <TextField
                         fullWidth
                         multiline
@@ -70,7 +88,10 @@ export const SmsForm = () => {
                         color="primary"
                         fullWidth
                         disabled={!message.trim() || loading}
-                        sx={{ mt: 2 }}
+                        sx={{ 
+                            mt: 2,
+                            py: { xs: 1, sm: 1.5 }
+                        }}
                     >
                         {loading ? <CircularProgress size={24} color="inherit" /> : 'Split Message'}
                     </Button>
@@ -83,23 +104,58 @@ export const SmsForm = () => {
                 )}
 
                 {splitMessages.length > 0 && (
-                    <Box sx={{ mt: 4 }}>
-                        <Typography variant="h6" gutterBottom>
+                    <Box sx={{ 
+                        mt: 3,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        flexGrow: 1
+                    }}>
+                        <Typography 
+                            variant="h6" 
+                            gutterBottom
+                            sx={{ fontSize: { xs: '1.1rem', sm: '1.25rem' } }}
+                        >
                             Split Messages ({splitMessages.length} part{splitMessages.length !== 1 ? 's' : ''}):
                         </Typography>
-                        <Box sx={{ maxHeight: 300, overflowY: 'auto' }}>
-                            <List>
+                        <Box sx={{ 
+                            flexGrow: 1,
+                            overflowY: 'auto',
+                            minHeight: 0,
+                            '&::-webkit-scrollbar': {
+                                width: '8px',
+                            },
+                            '&::-webkit-scrollbar-track': {
+                                background: '#f1f1f1',
+                                borderRadius: '4px',
+                            },
+                            '&::-webkit-scrollbar-thumb': {
+                                background: '#888',
+                                borderRadius: '4px',
+                            },
+                        }}>
+                            <List sx={{ py: 0 }}>
                                 {splitMessages.map((msg, index) => (
                                     <ListItem 
                                         key={index}
                                         component={Paper}
                                         variant="outlined"
-                                        sx={{ mb: 1 }}
+                                        sx={{ 
+                                            mb: 1,
+                                            p: { xs: 1.5, sm: 2 }
+                                        }}
                                     >
                                         <ListItemText 
                                             primary={msg}
                                             secondary={`Part ${index + 1} of ${splitMessages.length} (${msg.length} characters)`}
-                                            sx={{ wordBreak: 'break-all' }}
+                                            sx={{ 
+                                                wordBreak: 'break-all',
+                                                '& .MuiListItemText-primary': {
+                                                    fontSize: { xs: '0.875rem', sm: '1rem' }
+                                                },
+                                                '& .MuiListItemText-secondary': {
+                                                    fontSize: { xs: '0.75rem', sm: '0.875rem' }
+                                                }
+                                            }}
                                         />
                                     </ListItem>
                                 ))}
@@ -112,7 +168,7 @@ export const SmsForm = () => {
                             sx={{ mt: 2 }}
                             onClick={() => {
                                 setSplitMessages([]);
-                                setMessage(''); // Uncomment to also clear the input
+                                setMessage('');
                             }}
                         >
                             Clear Messages
@@ -122,4 +178,4 @@ export const SmsForm = () => {
             </Paper>
         </Box>
     );
-}; 
+};
