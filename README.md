@@ -1,54 +1,106 @@
-# React + TypeScript + Vite
+# SMS Splitter Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern React application built with Vite, TypeScript, and Material UI that provides a user interface for splitting long SMS messages into multiple parts while maintaining a maximum length of 160 characters per message.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Modern React application with TypeScript support
+- Material UI components for a polished user interface
+- Real-time message splitting preview
+- Character counter and part estimator
+- Responsive design
+- Error handling and loading states
+- Integration with SMS Splitter backend service
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Node.js 18 or higher
+- npm 9 or higher
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Setup and Running
+
+1. Clone the repository
+2. Navigate to the project directory
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+The application will start on port 5173 by default.
+
+## Project Structure
+
+```
+src/
+  ├── components/    # Reusable UI components
+  ├── services/     # API and other services
+  ├── types/        # TypeScript type definitions
+  └── assets/       # Static assets
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Architecture & Design Decisions
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Technology Stack
+- **Vite:** For fast development and optimal production builds
+- **TypeScript:** For type safety and better developer experience
+- **Material UI:** For a consistent and professional UI design
+- **React:** For building dynamic user interfaces
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 2. Component Structure
+- Modular components for better maintainability
+- Separation of concerns between UI components and business logic
+- Type-safe props and state management
+
+### 3. State Management
+- Local state management using React hooks
+- Efficient state updates for real-time character counting
+- Loading and error states for API interactions
+
+### 4. API Integration
+- Type-safe API calls
+- Error handling and loading states
+- Consistent response handling
+
+## Development
+
+### Running Tests
+```bash
+npm run test
 ```
+
+### Building for Production
+```bash
+npm run build
+```
+
+### Linting
+```bash
+npm run lint
+```
+
+## Future Improvements
+
+1. Add comprehensive test coverage
+2. Implement caching for API responses
+3. Add offline support
+4. Add user preferences (dark mode, etc.)
+5. Add animations for better UX
+6. Add internationalization support
+7. Add PWA support
+8. Implement CI/CD pipeline
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
